@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { asyncAddThreads } from '../states/threads/action';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function AddPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { threads, error } = useSelector((states) => states.threads);
+  const submitButtonClicked = useRef(false);
 
   const [threadInput, setThreadInput] = useState({
     title: '',
@@ -14,19 +18,14 @@ export default function AddPage() {
 
   async function onThreadSubmitHandler(e) {
     e.preventDefault();
+    submitButtonClicked.current = true;
 
     if (!localStorage.accessToken) {
       toast.error('Anda harus login terlebih dahulu!');
       return navigate('/login');
     }
 
-    const response = await asyncAddThreads(threadInput);
-    if (response.status === 'success') {
-      toast.success('Berhasil menambahkan thread!');
-      navigate('/');
-    } else {
-      toast.error(response.message);
-    }
+    dispatch(asyncAddThreads(threadInput));
   }
 
   function onthreadInputChangeHandler(e) {
@@ -36,6 +35,18 @@ export default function AddPage() {
       [name]: value,
     });
   }
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+      submitButtonClicked.current = false;
+    } else {
+      console.log(submitButtonClicked.current);
+      if (submitButtonClicked.current) {
+        navigate('/');
+      }
+    }
+  }, [error, navigate, threads]);
 
   return (
     <section className="mt-16 bg-gray-800 mx-auto p-6 md:w-4/5 lg:w-3/5 min-h-[92vh] text-white">

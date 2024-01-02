@@ -8,7 +8,7 @@ const initialState = {
 const threadsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ActionType.RECEIVE_THREADS:
-      return { ...state, threads: action.payload.threads };
+      return { threads: action.payload.threads, error: null };
     case 'error':
       return { ...state, error: action.payload.error };
     default:

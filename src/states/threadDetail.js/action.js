@@ -8,6 +8,7 @@ import {
   upVoteComments,
   upVoteThread,
 } from '../../utils/api';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_DETAIL_THREAD',
@@ -30,13 +31,16 @@ function receiveThreadDetailActionCreator(threadDetail) {
 
 function asyncGetThreadDetail(threadId) {
   return async (dispatch) => {
-    // dispatch(clearThreadDetailActionCreator());
+    dispatch(showLoading());
+
     try {
       const threadDetail = await getThreadDetail(threadId);
       dispatch(receiveThreadDetailActionCreator(threadDetail));
     } catch (error) {
       dispatch({ type: 'error', payload: { error } });
     }
+
+    dispatch(hideLoading());
   };
 }
 
@@ -64,12 +68,14 @@ function asyncToggleDownVoteThread({ upVoted, threadId }) {
 
 function asyncAddComment({ content, threadId }) {
   return async (dispatch) => {
+    dispatch(showLoading());
     try {
       await createComment({ content, threadId });
       dispatch(asyncGetThreadDetail(threadId));
     } catch (error) {
       dispatch({ type: 'error', payload: { error } });
     }
+    dispatch(hideLoading());
   };
 }
 

@@ -6,6 +6,7 @@ import DetailPage from './pages/DetailPage';
 import Navbar from './components/Navbar';
 import AddPage from './pages/AddPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import Loading from './components/Loading';
 // import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { asyncCheckAuthUser } from './states/authUser/action';
@@ -21,6 +22,7 @@ function App() {
     <>
       <header>
         <Navbar />
+        <Loading />
       </header>
       <main className="bg-gray-700">
         <Routes>
