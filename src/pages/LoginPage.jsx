@@ -37,17 +37,13 @@ export default function LoginPage() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('MASUK');
     dispatch(asyncSetAuthUser(inputForm));
   };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <Link
-          to="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
+        <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img
             className="w-8 h-8 mr-2"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
@@ -62,10 +58,7 @@ export default function LoginPage() {
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
                 </label>
                 <input
@@ -80,10 +73,7 @@ export default function LoginPage() {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Password
                 </label>
                 <input
@@ -114,10 +104,7 @@ export default function LoginPage() {
                     </label>
                   </div>
                 </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
+                <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
                   Forgot password?
                 </a>
               </div>
@@ -129,10 +116,7 @@ export default function LoginPage() {
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{' '}
-                <Link
-                  to="/register"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
+                <Link to="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                   Sign up
                 </Link>
               </p>
